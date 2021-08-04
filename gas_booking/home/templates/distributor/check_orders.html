@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title %}Distributor | check orders{% endblock %}
+
+{% block extra_css %}
+<style>
+  display-flex, .signup-content, .form-row, .form-radio, .select-icon, .select-icon i {
+  display: flex;
+  display: -webkit-flex; }
+
+  .form-row {
+    margin: 0 -15px; }
+    .form-row .form-group {
+      width: 50%;
+      padding: 0 15px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% include 'distributor/navbar.html' %}
+
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+          <div class="border-end" id="sidebar-wrapper" style="width: 15rem;">
+              <form method="POST"> {% csrf_token %}
+                <ul class="list-unstyled components mb-5">
+                  <li class="list-group-item p-3 ">
+                      <div class="form-group">
+                          <label> {{filter_form.form.order_date.label}}</label><br>
+                          {{filter_form.form.order_date}}
+                      </div>
+                  </li>
+
+                  <li class="list-group-item p-3">
+                      <div class="form-group">
+                          {{filter_form.form.user.label}}
+                          {{filter_form.form.user}}
+                      </div>
+                  </li>
+
+                  <li class="list-group-item p-3">
+                      <div class="form-group">
+                          {{filter_form.form.gas_name.label}}
+                          {{filter_form.form.gas_name}}
+                      </div>            
+                  </li>
+
+                  <li class="list-group-item p-3">
+                      <div class="form-group">
+                          {{filter_form.form.status.label}}
+                          {{filter_form.form.status}}
+                      </div>           
+                  </li>
+
+                  <li class="list-group-item p-3">
+                      <div class="form-row">
+                          <div class="form-group">
+                              <button type="submit" id="filter" class="btn btn-lg btn-primary ">Filter</button>
+                          </div>
+                          <div class="form-group">
+                              <a href="{% url 'check_orders' %}" class="btn btn-lg btn-danger" name="reset_form">clear</a>
+                          </div>
+                      </div>        
+                  </li>
+                </ul>
+              </form>
+          </div>
+      </div>
+
+      <div class="col py-3">
+        {% if filter_orders %}
+        <div class="container">
+          <table class="table table-hover mt-3 p-3">
+            <thead>
+                <tr>
+                    <th colspan="10"> <h1 class="text-center text-white">Filter Orders</h1> </th>    
+                </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th scope="col">Order Id</th>
+                <th scope="col">Consumer Id</th>
+                <th scope="col">Consumer Name</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Order Time</th>
+                <th scope="col">Gas Name</th>
+                <th scope="col">Payable Amount</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in filter_orders %}
+              <tr class="table-active">
+                <th scope="row">{{order.id}}</th>
+                <td>{{order.user.id}}</td>
+                <td>{{order.user.first_name}}  {{order.user.last_name}}</td>
+                <td>{{order.order_date}}</td>
+                <td>{{order.order_time}}</td>
+                <td>{{order.gas_name.gas_name}}</td>
+                <td>{{order.payable_amount}}</td>
+                <td>{{order.status}}</td>
+                <td><a href="{% url 'edit_consumers' order.id %}">  Edit </a></td>
+                <td><a href="#">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="container">
+            <table class="table table-hover mt-3 p-3">
+                <thead>
+                    <tr>
+                        <th colspan="10"> <h1 class="text-center text-white">Running Orders</h1> </th>    
+                    </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Consumer Id</th>
+                    <th scope="col">Consumer Name</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Order Time</th>
+                    <th scope="col">Gas Name</th>
+                    <th scope="col">Payable Amount</th>
+                    <th scope="col">Order Status</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                  <tr class="table-active">
+                    <th scope="row">{{order.id}}</th>
+                    <td>{{order.user.id}}</td>
+                    <td>{{order.user.first_name}}  {{order.user.last_name}}</td>
+                    <td>{{order.order_date}}</td>
+                    <td>{{order.order_time}}</td>
+                    <td>{{order.gas_name.gas_name}}</td>
+                    <td>{{order.payable_amount}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a href="{% url 'edit_consumers' order.id %}">  Edit </a></td>
+                    <td><a href="#">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              <!-- pagination for running orders -->
+              <div style="margin-left: 36rem; margin-top: 50px; ">
+                {% if orders.has_other_pages %}
+                <ul class="pagination">
+                    {% if orders.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    {% for i in orders.paginator.page_range %}
+                    {% if orders.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %} 
+                        <li class='page-item'><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if orders.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+              </div>
+      <!-- End pagination for running orders -->
+
+      <table class="table table-hover mt-3 p-3">
+        <thead>
+            <tr>
+                <th colspan="10"> <h1 class="text-center text-white">Delivered Orders</h1> </th>    
+            </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Consumer Id</th>
+            <th scope="col">Consumer Name</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Time</th>
+            <th scope="col">Gas Name</th>
+            <th scope="col">Payable Amount</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in delivered_orders %}
+          <tr class="table-active">
+            <th scope="row">{{order.id}}</th>
+            <td>{{order.user.id}}</td>
+            <td>{{order.user.first_name}}  {{order.user.last_name}}</td>
+            <td>{{order.order_date}}</td>
+            <td>{{order.order_time}}</td>
+            <td>{{order.gas_name.gas_name}}</td>
+            <td>{{order.payable_amount}}</td>
+            <td>{{order.status}}</td>
+            <td><a href="{% url 'edit_consumers' order.id %}">  Edit </a></td>
+            <td><a href="#">Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- pagination for running orders -->
+      <div style="margin-left: 36rem; margin-top: 50px; ">
+        {% if delivered_orders.has_other_pages %}
+        <ul class="pagination">
+            {% if delivered_orders.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {% for i in delivered_orders.paginator.page_range %}
+            {% if delivered_orders.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %} 
+                <li class='page-item'><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if delivered_orders.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+      </div>
+      <!-- End pagination for running orders -->
+
+    </div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+    
+{% endblock %}

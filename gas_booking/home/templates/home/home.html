@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<style>
+  .bg-image{
+    background-image: url('{% static "images/home_bg.jpg" %}');
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    height: 500px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">OGBS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <ul class="navbar-nav ">
+        <li class="nav-item p-2">
+          <a href="{% url 'consumer_signup' %}" class="nav-link btn btn-warning" >Sign Up</a>
+        </li>
+        <li class="nav-item p-2">
+            <a href="{% url 'login' %}" class="nav-link btn btn-danger">Sign In</a>
+        </li>
+      </ul>
+      
+    </div>
+</nav>
+
+      
+
+<div class="card" style="margin-bottom: 50px;">
+    <div class="d-block user-select-none bg-image" >
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+                        <h1 class="text-white font-weight-bold">Welcome To The Gas World</h1>
+                        <hr class="divider" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-50 mb-5">In this site you can find your needed gas. We are help to deliver gas from your nearest gas store to your home with fixed price cost. </p>
+                        <a class="btn btn-primary btn-xl" href="{% url 'consumer_signup' %}">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <section class="page-section bg-primary p-5" id="services">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center text-white mt-0">At Your Service</h2>
+            <hr class="divider" />
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="">
+                        <span style="font-size: 40px; color: blanchedalmond;"><i class="fas fa-truck"></i></span>
+                        <h3 class="h4 mb-2">Home Delivery</h3>
+                        <p class="text-white-50 mb-0"> We delivered gas to your home with fixed price. </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="">
+                        <span style="font-size: 40px; color: blanchedalmond; margin-bottom: 20px;"> <i class="fas fa-tasks"></i> </span>
+                        <h3 class="h4 mb-2">Manage Stock</h3>
+                        <p class="text-white-50 mb-0">We are help to manage your stock.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="">
+                        <span style="font-size: 40px; color: blanchedalmond; margin-bottom: 20px;"> <i class="fab fa-ravelry"></i> </span>
+                        <h3 class="h4 mb-2">Effective Rates</h3>
+                        <p class="text-white-50 mb-0">We fixed rate of gas which is effective for consumer and distributor both.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="">
+                        <span style="font-size: 40px; color: blanchedalmond; margin-bottom: 20px;"> <i class="far fa-bookmark"></i> </span>
+                        <h3 class="h4 mb-2">Gas Booking </h3>
+                        <p class="text-white-50 mb-0">We are help to book your gas within certain time period.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section p-4">
+        <h2 class="text-center">Safety Tips For Gas In Home - Do’s & Don’ts</h2>
+		<hr class="divider" />
+
+		<div class="container ">
+				<div class="row" id='box'>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<u class="text-success"><h3 class="text-success" style="margin-left: -500px !important;" ><i class="fas fa-check"></i> DO'S</h3></u>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Use gas in Ventilated Area</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Before connecting, check for gas leakage</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Close the regulator knob once you finish cooking</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Always keep the cylinder vertical, upright during usage and storage</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Always install gas pipeline above ground level</h3>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<u class="text-danger"><h3 class="text-danger" style="margin-left: -500px !important;"><i class="fas fa-times"></i> DON'T</h3></u>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Don’t place cylinders in closed areas.</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Do not use any flammable objects near or over the burner</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Do not switch on or off any lights or electrical equipment, smoke or use naked flames incase of leakage</h3>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-md-9">
+								<h4>Do not roll the cylinder</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-9">
+								<h4>Never store gas in basement, cellar, elevated platforms</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+    </section>
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+	// Get the modal
+var modal = document.getElementById("login_modal");
+var signup_modal = document.getElementById("signup_modal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("login_btn");
+var s_btn = document.getElementById("signup_btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("btn-close")[0];
+var s_span = document.getElementsByClassName("s-btn-close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+s_btn.onclick = function() {
+  signup_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+s_span.onclick = function() {
+  signup_modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+window.onclick = function(event) {
+  if (event.target == signup_modal) {
+    signup_modal.style.display = "none";
+  }
+}
+
+$('#login_modal')
+  .on('shown', function () {
+    $('body').on('wheel.modal mousewheel.modal', function () {
+      return false;
+    });
+  })
+  .on('hidden', function () {
+    $('body').off('wheel.modal mousewheel.modal');
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+ {% load static %}
+{% block title %}Distributor | Edit Profile{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'userauth/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include 'distributor/navbar.html' %}
+
+<div class="card border-primary" style="margin: 10px 0px -20px 400px; width: 50rem; ">
+    <div class="card-header"><h1 class="text-center">Edit Your Details</h1></div>
+    <form method="POST" class="register-form"> {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group">
+                {{u_form.first_name.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.first_name.errors.as_text }}</small>
+
+                {{u_form.first_name}}
+            </div>
+            <div class="form-group">
+                <label for="last_name">{{u_form.last_name.label}}</label>
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.last_name.errors.as_text }}</small>
+
+                {{u_form.last_name}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{d_form.distributor_name.label}}  
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.distributor_name.errors.as_text }}</small>
+
+            {{d_form.distributor_name}}                
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{u_form.email.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.email.errors.as_text }}</small>
+
+                {{u_form.email}}
+            </div>
+            <div class="form-group">
+                {{d_form.mobile_phone.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.mobile_phone.errors.as_text }}</small>
+
+                {{d_form.mobile_phone}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{u_form.username.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{u_form.username.errors.as_text }}</small>
+
+            {{u_form.username}}
+        </div>
+        <div class="form-group">
+            {{d_form.address.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.address.errors.as_text }}</small>
+
+            {{d_form.address}}
+            <p class="text-success">{{d_form.address.help_text}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{d_form.city.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.city.errors.as_text }}</small>
+
+                {{d_form.city}}
+            </div>
+            <div class="form-group">
+                {{d_form.zip_code.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.zip_code.errors.as_text }}</small>
+
+                {{d_form.zip_code}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{d_form.state.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.state.errors.as_text }}</small>
+
+                {{d_form.state}}
+            </div>
+            <div class="form-group">
+                {{d_form.country.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.country.errors.as_text }}</small>
+
+                <div class="bg-white">{{d_form.country}}</div>
+            </div>
+        </div>
+        <div class="form-group">
+            {{d_form.website.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.website.errors.as_text }}</small>
+
+            {{d_form.website}}
+        </div>
+        <div class="form-group">
+            {{d_form.proof_pic.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.proof_pic.errors.as_text }}</small>
+
+            {{d_form.proof_pic}}
+        </div>
+        <div class="form-group">
+            {{d_form.date_of_birth.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.date_of_birth.errors.as_text }}</small>
+
+            {{d_form.date_of_birth}}
+        </div>
+        <div class="form-group">
+            {{d_form.additional_information.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.additional_information.errors.as_text }}</small>
+
+            {{d_form.additional_information}}
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" id="submit" class="btn btn-primary" style="width: 40rem; margin-left: -20px !important;">Confirm Edit</button>
+        </div> 
+    </form>
+</div>
+
+{% endblock %}

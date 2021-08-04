@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Sign In{% endblock %}
+
+{% block extra_css %}
+<style>
+form i {
+    cursor: pointer;
+    color: #2aa198;
+    float: right;
+    margin-top: -38px;
+    margin-right: 10px;
+
+}</style>
+{% endblock %}
+
+{% block content %}
+<div class="card border-primary" style="width: 50rem; margin-left: 350px; margin-top: 100px;">
+    <div class="card-header"><h1>Sign In</h1></div>
+
+    {% for msg in messages %}
+    <p class="text-success text-center">{{msg}}</p>
+    {% endfor %}
+
+    <form method="POST" action="{% url 'login' %}"> {% csrf_token %}
+        <div class="container">
+            <div class="form-group">
+                <label class="form-label mt-4 text-success"><strong>Your Valid Username </strong></label>
+                <div class="form-floating mb-4">
+                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Username</label>
+                </div>
+
+                <label class="form-label text-success"><strong> Your Respective Password </strong></label>
+                <div class="form-floating mb-4">
+                    <input type="password" name="password" class="form-control" id="id_password" placeholder="Password">
+                    <i class="fa fa-eye" id="togglePassword" style="font-size: 25px;"></i>
+                    <label for="id_password">Password</label>
+                </div>
+            </div>
+        </div>
+    
+
+        <p class="text-center"><a href="{% url 'password_reset' %}" class="btn">Forgot password?</a></p>
+        <p class="text-center">Don't have an account?<a href="{% url 'consumer_signup' %}" class="btn"> Sign up here !</a></p>
+
+            
+        <div class="card-footer">
+            <input type="submit" class="btn btn-primary" style="width: 40rem; margin-left: 50px !important;" value="Login">
+        </div> 
+    </form>   
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#id_password');
+    
+        togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+});
+    </script>
+{% endblock %}
+
+
+<!-- 
+        <div class="form-group m-4">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> Phone </span>
+             </div>
+             <input type="text" name="username" class="form-control">
+        </div> 
+        </div> 
+        <div class="form-group m-4">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> Password </span>
+             </div>
+             <input type="password" name="password" class="form-control" id= "id_password">
+            <i class="fa fa-eye" id="togglePassword"></i>
+            </div> 
+        </div> 
+    
+        <p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
+        <p class="text-center">Don't have an account?<a href="{% url 'consumer_signup' %}" class="btn"> Sign up here !</a></p>
+
+        
+    <div class="card-footer">
+        <input type="submit" class="btn btn-primary" style="width: 40rem; margin-left: 50px !important;" value="Login">
+    </div>
+    </form> -->

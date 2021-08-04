@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+{% include 'consumer/navbar.html' %}
+<div class="container">
+<table class="table table-hover m-4 p-4">
+  <thead>
+    <tr>
+      <th scope="col" class="text-center" colspan="2">Your Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Email Address: </th>
+      <td>{{details.user.email}} <a href="{% url 'edit_consumer' %}" title="Edit Your Profile" style="margin-left: 15px;"> <i class="fas fa-edit"></i></a></td>
+    </tr>
+    <tr class="table-active">
+      <th scope="row">Your Address: </th>
+      <td class="text-capitalize">{{details.address}}, {{details.city}} {{details.zip_code}}, {{details.state}}, {{details.country}}
+        <a href="{% url 'edit_consumer' %}" title="Edit Your Profile" style="margin-left: 15px;"> <i class="fas fa-edit"></i></a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Mobile Phone: </th>
+      <td>{{details.mobile_phone}} <a href="{% url 'edit_consumer' %}" title="Edit Your Profile" style="margin-left: 15px;"> <i class="fas fa-edit"></i></a></td>
+    </tr>
+    <tr>
+      <th scope="row">Additional Information: </th>
+      <td>{{details.additional_information}} <a href="{% url 'edit_consumer' %}" title="Edit Your Profile" style="margin-left: 15px;"> <i class="fas fa-edit"></i></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

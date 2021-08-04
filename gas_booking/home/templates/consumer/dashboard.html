@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Consumer | Dashboard{% endblock %}
+
+{% block content %}
+
+{% include 'consumer/navbar.html' %}
+
+<div class="container-xxl">
+    <div class="row">
+
+    {% for distributor in distributor_details %}
+
+      <div class="col-4">
+        <div class="card border-primary mt-3 mb-3" style="max-width: 22rem;">
+          <div class="card-header"><h2 class="text-center">{{distributor.distributor_name}} </h2></div>
+          <div class="card-body">
+            <h4 class="card-title">{{distributor.user.first_name}}  {{distributor.user.last_name}}</h4>
+            <p class="card-text">{{distributor.additional_information}}</p>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'distributor_details' distributor.id %}" class="card-link">See More About</a>
+            <a href="{% url 'gas_order' %}" class="card-link">Order Now</a>
+          </div>
+        </div>
+      </div> 
+
+      {% endfor %}
+
+    </div>
+</div>
+  
+{% endblock %}

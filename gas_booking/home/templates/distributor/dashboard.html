@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Distributor | Dashboard{% endblock %}
+
+{% block content %}
+
+{% include 'distributor/navbar.html' %}
+<div class="container">
+<table class="table table-hover mt-3 p-3">
+    <thead>
+        <tr>
+            <th colspan="4"> 
+              <h1 class="text-center text-white">Your Stock</h1> 
+              <a class="badge bg-primary btn" href="{% url 'add_gas' %}"> Add New </a>
+            </th>
+        </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th scope="col">Gas</th>
+        <th scope="col">Number of Gas</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for gas in items %}
+      <tr class="table-active">
+        <th scope="row">{{gas.gas_name}}</th>
+        <td>{{gas.gas_number}}</td>
+        <td><a href="{% url 'edit_gas' gas.id %}">Edit</a></td>
+        <td><a href="{% url 'delete_gas' gas.id %}">Delete</a></td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}

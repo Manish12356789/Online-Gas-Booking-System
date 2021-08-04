@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Distributor | check orders{% endblock %}
+
+{% block content %}
+
+{% include 'distributor/navbar.html' %}
+<div class="card border-primary mb-3" style="width: 50rem; margin-left: 350px; margin-top: 100px;">
+    <div class="card-header"><h1 class="text-center">Update Your Stock</h1></div>
+    <form method="POST" novalidate class="form-group">{% csrf_token %}
+        <div class="form-group p-4">
+            <label class="text-success" style="font-size: 20px;">{{form.gas_name.label}}</label>
+            {{form.gas_name}}
+        </div>
+        <div class="form-group p-4">
+            <label class="text-success" style="font-size: 20px;">{{form.gas_number.label}}</label>
+            {{form.gas_number}}
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="submit" class="btn btn-primary" style="width: 40rem; margin-left: 50px !important;">Update Stock</button>
+        </div> 
+    </form>            
+</div>
+{% endblock %}

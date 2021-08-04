@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Distributor Sign Up{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'userauth/style.css' %}">
+    <style>
+        form i{
+            cursor: pointer; 
+            color:#2aa198; 
+            margin-top: -29px; 
+            margin-right: 10px;  
+            float: right; 
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<ul class="nav nav-tabs p-4">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'consumer_signup' %}">Consumer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active"  href="">Distributor</a>
+    </li>
+</ul>
+
+<!-- <div id="myTabContent" class="tab-content p-4" style="margin-bottom: 30px;" >  -->
+
+<!-- Distributor signup form tab-->
+<div class="tab-pane" id="profile">
+    {{ form.non_field_errors }}
+
+    <form method="POST" novalidate class="register-form"> {% csrf_token %}
+        <h2 class="text-white text-center mb-4">Distributor Registration </h2>
+        <div class="form-row">
+            <div class="form-group">
+                {{u_form.first_name.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.first_name.errors.as_text }}</small>
+
+                {{u_form.first_name}}
+            </div>
+            <div class="form-group">
+                <label for="last_name">{{u_form.last_name.label}}</label>
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.last_name.errors.as_text }}</small>
+
+                {{u_form.last_name}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{d_form.distributor_name.label}}  
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.distributor_name.errors.as_text }}</small>
+
+            {{d_form.distributor_name}}
+            <p class="text-success">{{d_form.distributor_name.help_text}}  
+                
+            </p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{u_form.email.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.email.errors.as_text }}</small>
+
+                {{u_form.email}}
+            </div>
+            <div class="form-group">
+                {{d_form.mobile_phone.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.mobile_phone.errors.as_text }}</small>
+
+                {{d_form.mobile_phone}}
+                <p class="text-success">{{d_form.mobile_phone.help_text}}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{u_form.username.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.username.errors.as_text }}</small>
+
+                {{u_form.username}}
+                <p class="text-success">{{u_form.username.help_text}}</p>
+            </div>
+            <div class="form-group">
+                {{u_form.password.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{u_form.password.errors.as_text }}</small>
+
+                {{u_form.password}}  
+                <i class="fa fa-eye" id="togglePassword" style="font-size: 20px;"></i> 
+                <p class="text-success">{{u_form.password.help_text}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            {{d_form.address.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.address.errors.as_text }}</small>
+
+            {{d_form.address}}
+            <p class="text-success">{{d_form.address.help_text}}</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{d_form.city.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.city.errors.as_text }}</small>
+
+                {{d_form.city}}
+                <p class="text-success">{{d_form.city.help_text}}</p>
+            </div>
+            <div class="form-group">
+                {{d_form.zip_code.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.zip_code.errors.as_text }}</small>
+
+                {{d_form.zip_code}}
+                <p class="text-success">{{d_form.zip_code.help_text}}</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{d_form.state.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.state.errors.as_text }}</small>
+
+                {{d_form.state}}
+                <p class="text-success">{{d_form.state.help_text}}</p>
+            </div>
+            <div class="form-group">
+                {{d_form.country.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{d_form.country.errors.as_text }}</small>
+
+                <div class="bg-white">{{d_form.country}}</div>
+                <p class="text-success">{{d_form.country.help_text}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            {{d_form.website.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.website.errors.as_text }}</small>
+
+            {{d_form.website}}
+            <p class="text-success">{{d_form.website.help_text}}</p>
+        </div>
+        <div class="form-group">
+            {{d_form.proof_pic.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.proof_pic.errors.as_text }}</small>
+
+            {{d_form.proof_pic}}
+            <p class="text-success">{{d_form.proof_pic.help_text}}</p>
+        </div>
+        <div class="form-group">
+            {{d_form.date_of_birth.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.date_of_birth.errors.as_text }}</small>
+
+            {{d_form.date_of_birth}}
+            <p class="text-success">{{d_form.date_of_birth.help_text}}</p>
+        </div>
+        <div class="form-group">
+            {{d_form.additional_information.label}}
+            <small style="margin-left: 20px;" class="text-danger"> {{d_form.additional_information.errors.as_text }}</small>
+
+            {{d_form.additional_information}}
+            <p class="text-success">{{d_form.additional_information.help_text}}</p>
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="Submit Form" class="btn btn-primary"  />
+        </div>
+    </form>
+    <p class="text-center"> Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  
+  </div>
+  
+
+  {% endblock %}
+
+  {% block extra_js %}
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#id_password');
+    
+        togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+});
+    </script>
+{% endblock %}

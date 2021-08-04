@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'userauth/style.css' %}">
+    <style>
+        form i{
+            cursor: pointer; 
+            color:#2aa198; 
+            margin-top: -29px; 
+            margin-right: 10px;  
+            float: right; 
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<ul class="nav nav-tabs p-4">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="tab" href="#home">Consumer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="{% url 'distributor_signup' %}">Distributor</a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="tab-content p-4" style="margin-bottom: 30px;" > 
+
+    <!-- Consumer signup form tab-->
+    <div class="tab-pane fade active show" id="home">
+        {{ form.non_field_errors }}
+        <form method="POST" novalidate class="register-form" id="register-form"> {% csrf_token %}
+            <h2 class="text-white text-center mb-4">Consumer Registration </h2>
+            <div class="form-row">
+                <div class="form-group">
+                    {{u_form.first_name.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{d_form.first_name.errors.as_text }}</small>
+    
+                    {{u_form.first_name}}
+                </div>
+                <div class="form-group">
+                    <label for="last_name">{{u_form.last_name.label}}</label>
+                    <small style="margin-left: 20px;" class="text-danger"> {{d_form.last_name.errors.as_text }}</small>
+    
+                    {{u_form.last_name}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{u_form.email.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{u_form.email.errors.as_text }}</small>
+    
+                    {{u_form.email}}
+                </div>
+                <div class="form-group">
+                    {{c_form.mobile_phone.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{c_form.mobile_phone.errors.as_text }}</small>
+    
+                    {{c_form.mobile_phone}}
+                    <p class="text-success">{{c_form.mobile_phone.help_text}}</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{u_form.username.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{u_form.username.errors.as_text }}</small>
+    
+                    {{u_form.username}}
+                    <p class="text-success">{{u_form.username.help_text}}</p>
+                </div>
+                <div class="form-group">
+                    {{u_form.password.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{u_form.password.errors.as_text }}</small>
+    
+                    {{u_form.password}}  
+                    <i class="fa fa-eye" id="togglePassword" style="font-size: 20px;"></i> 
+                    <p class="text-success">{{u_form.password.help_text}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                {{c_form.address.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{c_form.address.errors.as_text }}</small>
+    
+                {{c_form.address}}
+                <p class="text-success">{{c_form.address.help_text}}</p>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{c_form.city.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{c_form.city.errors.as_text }}</small>
+    
+                    {{c_form.city}}
+                    <p class="text-success">{{c_form.city.help_text}}</p>
+                </div>
+                <div class="form-group">
+                    {{c_form.zip_code.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{c_form.zip_code.errors.as_text }}</small>
+    
+                    {{c_form.zip_code}}
+                    <p class="text-success">{{c_form.zip_code.help_text}}</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{c_form.state.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{c_form.state.errors.as_text }}</small>
+    
+                    {{c_form.state}}
+                    <p class="text-success">{{c_form.state.help_text}}</p>
+                </div>
+                <div class="form-group">
+                    {{c_form.country.label}}
+                    <small style="margin-left: 20px;" class="text-danger"> {{c_form.country.errors.as_text }}</small>
+    
+                    <div class="bg-white">{{c_form.country}}</div>
+                    <p class="text-success">{{c_form.country.help_text}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                {{c_form.date_of_birth.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{c_form.date_of_birth.errors.as_text }}</small>
+
+                {{c_form.date_of_birth}}
+                <p class="text-success">{{c_form.date_of_birth.help_text}}</p>
+            </div>
+            <div class="form-group">
+                {{c_form.additional_information.label}}
+                <small style="margin-left: 20px;" class="text-danger"> {{c_form.date_of_birth.errors.as_text }}</small>
+
+                {{c_form.additional_information}}
+                <p class="text-success">{{c_form.additional_information.help_text}}</p>
+            </div>
+            <div class="form-submit">
+                <input type="submit" value="Submit Form" class="btn btn-primary" name="consumer_submit" />
+            </div>
+        </form>
+        <p class="text-center"> Already have an account? <a href="{% url 'login' %}">Login</a></p>
+       
+    </div>
+
+
+  </div>
+  
+
+  {% endblock %}
+
+  {% block extra_js %}
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#id_password');
+    
+        togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+});
+    </script>
+{% endblock %}

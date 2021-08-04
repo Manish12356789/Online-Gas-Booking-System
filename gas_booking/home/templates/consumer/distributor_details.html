@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+{% include 'consumer/navbar.html' %}
+
+<div class="container">
+<table class="table table-hover m-4 w-75">
+    <thead>
+      <tr>
+        <th scope="col" colspan="2" class="text-center" >Distributor Details</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-active">
+        <th scope="row">Store Name: </th>
+        <td class="text-capitalize">{{details.distributor_name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Destributor Email Address: </th>
+        <td>{{details.user.email}}</td>
+      </tr>
+      <tr class="table-active">
+        <th scope="row">Destributor Address: </th>
+        <td class="text-capitalize">{{details.address}}, {{details.city}} {{details.zip_code}}, {{details.state}}, {{details.country}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Destributor Phone: </th>
+        <td>{{details.mobile_phone}}</td>
+      </tr>
+      <tr class="table-active">
+        <th scope="row">Destributor Website: </th>
+        <td class="text-capitalize"><a class="text-white-50" href="{{details.website}}"> {{details.website}} </a></td>
+      </tr>
+      <tr>
+        <th scope="row">Additional Information: </th>
+        <td>{{details.additional_information}}</td>
+      </tr>
+    </tbody>
+</table>
+</div>
+{% endblock %}

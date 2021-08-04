@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Distributor | Manage Consumers{% endblock %}
+
+{% block extra_css %}
+<style>
+  display-flex, .signup-content, .form-row, .form-radio, .select-icon, .select-icon i {
+  display: flex;
+  display: -webkit-flex; }
+
+  .form-row {
+    margin: 0 -15px; }
+    .form-row .form-group {
+      width: 50%;
+      padding: 0 15px; }
+  
+  .form-group {
+    margin-bottom: 23px;
+    position: relative; }
+
+    @media screen and (max-width: 575px) {
+    .form-row {
+      flex-direction: column;
+      -moz-flex-direction: column;
+      -webkit-flex-direction: column;
+      -o-flex-direction: column;
+      -ms-flex-direction: column;
+      margin: 0px; }
+  
+    .form-row .form-group {
+      width: 100%;
+      padding: 0px; }}
+</style>
+{% endblock %}
+{% block content %}
+
+{% include 'distributor/navbar.html' %}
+<div class="container">
+  <table class="table table-hover mt-3 p-3">
+    <thead>
+        <tr>
+            <th colspan="11"> <h1 class="text-center text-white">Manage Consumers</h1> </th>    
+        </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th scope="col">Consumer Id</th>
+        <th scope="col">Consumer Name</th>
+        <th scope="col">Address</th>
+        <th scope="col"> Contact</th>
+        <th scope="col"> Email</th>
+        <th scope="col"> Registeration Date</th>
+        <th scope="col"> Status</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for consumer in consumers %}
+      <tr class="table-active">
+        <th scope="row">{{consumer.id}}</th>
+        <td>{{consumer.user.first_name}}  {{consumer.user.last_name}}</td>
+        <td>{{consumer.address}}, {{consumer.city}} {{consumer.zip_code}}</td>
+        <td>{{consumer.mobile_phone}}</td>
+        <td>{{consumer.user.email}}</td>
+        <td>{{consumer.user.date_joined}}</td>
+        {% if consumer.user.is_active %}
+        <td>Active</td>
+        {% else %}
+        <td>Offline</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  <div style="position:absolute; bottom: 50; margin-left: 36rem; ">
+    {% if consumers.has_other_pages %}
+    <ul class="pagination">
+        {% if consumers.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+        {% for i in consumers.paginator.page_range %}
+        {% if consumers.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %} 
+            <li class='page-item'><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if consumers.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+  </div>      
+</div>
+
+{% endblock %}
+

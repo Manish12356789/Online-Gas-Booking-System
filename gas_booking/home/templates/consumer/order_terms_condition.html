@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Consumer | Order Terms and Conditions{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'consumer/navbar.html' %}
+
+
+<div class="container">
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>For Gas Order</h2></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label><b>Terms & Conditions *</b></label>
+                <div style="border: 1px solid #e5e5e5; height: 300px; overflow: auto; padding: 10px;">
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Current price for single gas-cylinder is <span class="text-success">Rs. 1500</span></p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Order cannot be canceled once you place order.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Prices may be change as per government rules.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> You cannot place order for more than one gas cylinder.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Once your order will deliver then and then you can place order for another refill.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Order will be delivered to registered address.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Order status update will be drop via SMS(Linked mobile no.) & Email(Linked email address).</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Order will be delivered with week, If not then you can write complain to us.</p>
+                    <p><i class="glyphicon glyphicon-chevron-right"></i> Product delivery is strictly on first come first served basis.</p>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid mt-5">
+            <a href="{% url 'gas_order' %}" class="btn btn-lg btn-primary mr-3" >Back  <i class="fas fa-fast-backward"></i></a> 
+        </div>
+    </div>
+</div>
+
+{% endblock %}
